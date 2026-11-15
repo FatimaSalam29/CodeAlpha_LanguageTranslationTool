@@ -1,4 +1,4 @@
-/** Languages offered in the dropdowns. Codes are Google Cloud Translation language codes. */
+/** Languages offered in the dropdowns. Codes are ISO 639-1 / RFC 3066 codes accepted by MyMemory. */
 export const LANGUAGES = [
   { code: "en", name: "English" },
   { code: "ar", name: "Arabic" },
@@ -35,7 +35,7 @@ export const LANGUAGES = [
 
 export type LanguageCode = (typeof LANGUAGES)[number]["code"];
 
-/** Special source value: let Google detect the input language. */
+/** Special source value: let the translation service detect the input language. */
 export const AUTO_DETECT = "auto" as const;
 
 export const LANGUAGE_CODES = LANGUAGES.map((l) => l.code) as [LanguageCode, ...LanguageCode[]];
@@ -47,11 +47,15 @@ export function isRtl(code: string | null | undefined): boolean {
   return !!code && RTL_CODES.has(code);
 }
 
-/** Normalise codes Google may return (e.g. "iw" for Hebrew) to the codes used in the dropdowns. */
+/** Normalise codes the API may return (e.g. "iw", "fr-FR") to the codes used in the dropdowns. */
 export function normalizeLanguageCode(code: string): string {
-  if (code === "iw") return "he";
-  if (code === "zh") return "zh-CN";
-  return code;
+  const trimmed = code.trim();
+  const lower = trimmed.toLowerCase();
+  if (lower === "iw") return "he";
+  if (lower === "zh" || lower === "zh-cn") return "zh-CN";
+  if (lower === "zh-tw") return "zh-TW";
+  // Drop region suffixes for everything else ("fr-FR" -> "fr").
+  return lower.split(/[-_]/)[0] ?? lower;
 }
 
 export function isSupportedLanguage(code: string): code is LanguageCode {

@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import {
   AlertCircle,
   ArrowLeftRight,
@@ -19,9 +18,8 @@ import {
   getLanguageName,
   isRtl,
   isSupportedLanguage,
-  normalizeLanguageCode,
 } from "@/lib/languages";
-import { translateText } from "@/lib/translate.functions";
+import { translateWithMyMemory } from "@/lib/mymemory";
 import { MAX_CHARS, translateInputSchema, type TranslateInput } from "@/lib/translate.schema";
 import { cn } from "@/lib/utils";
 
@@ -42,18 +40,15 @@ export function Translator() {
   const [copied, setCopied] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const translateFn = useServerFn(translateText);
   const mutation = useMutation({
-    mutationFn: (input: TranslateInput) => translateFn({ data: input }),
+    mutationFn: (input: TranslateInput) => translateWithMyMemory(input),
     onSuccess: (result, input) => {
       if (result.ok) {
         setError(null);
         setTranslation({
           text: result.translatedText,
           target: input.target,
-          detected: result.detectedSourceLanguage
-            ? normalizeLanguageCode(result.detectedSourceLanguage)
-            : null,
+          detected: result.detectedSourceLanguage,
         });
       } else {
         setTranslation(null);

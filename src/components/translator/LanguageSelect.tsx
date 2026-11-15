@@ -37,18 +37,20 @@ export function LanguageSelect({
       >
         {label}
       </label>
-      <Select value={value} onValueChange={onChange} disabled={disabled}>
+      <Select value={value} onValueChange={onChange} disabled={disabled ?? false}>
         <SelectTrigger
           id={id}
-          className="h-12 rounded-xl border-border bg-card px-4 text-[15px] font-medium shadow-none transition-all hover:border-ring/50 focus:ring-0 focus:shadow-glow data-[state=open]:border-ring/60 data-[state=open]:shadow-glow"
+          className="h-12 rounded-xl border-border bg-card px-3 text-[15px] sm:px-4 font-medium shadow-none transition-all hover:border-ring/50 focus:ring-0 focus:shadow-glow data-[state=open]:border-ring/60 data-[state=open]:shadow-glow"
         >
           <SelectValue>
             {value === AUTO_DETECT ? (
-              <span className="flex items-center gap-2">
-                <Sparkles className="size-4 text-primary" />
-                {detectedLanguage
-                  ? `Detected: ${getLanguageName(detectedLanguage)}`
-                  : "Detect language"}
+              <span className="flex min-w-0 items-center gap-2">
+                <Sparkles className="size-4 shrink-0 text-primary" />
+                <span className="truncate">
+                  {detectedLanguage
+                    ? `Detected: ${getLanguageName(detectedLanguage)}`
+                    : "Detect language"}
+                </span>
               </span>
             ) : (
               getLanguageName(value)

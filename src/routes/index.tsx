@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { Globe2, Languages, ShieldCheck } from "lucide-react";
 
 import { Translator } from "@/components/translator/Translator";
@@ -10,12 +10,12 @@ export const Route = createFileRoute("/")({
       { title: "Glossa — Instant Language Translator" },
       {
         name: "description",
-        content: `Translate text between ${LANGUAGES.length} languages instantly with Google Cloud Translation.`,
+        content: `Translate text between ${LANGUAGES.length} languages instantly with the MyMemory translation API.`,
       },
       { property: "og:title", content: "Glossa — Instant Language Translator" },
       {
         property: "og:description",
-        content: `Translate text between ${LANGUAGES.length} languages instantly with Google Cloud Translation.`,
+        content: `Translate text between ${LANGUAGES.length} languages instantly with the MyMemory translation API.`,
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -30,15 +30,15 @@ function Index() {
       <div aria-hidden className="grid-fade pointer-events-none absolute inset-x-0 top-0 h-[520px]" />
 
       <header className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-5 sm:px-8">
-        <a href="/" className="flex items-center gap-2.5">
+        <Link to="/" className="flex items-center gap-2.5">
           <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-elegant">
             <Languages className="size-5" />
           </span>
           <span className="font-display text-lg font-semibold tracking-tight">Glossa</span>
-        </a>
+        </Link>
         <span className="hidden items-center gap-2 rounded-full border border-border bg-card/80 px-3.5 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur sm:inline-flex">
           <span className="size-1.5 rounded-full bg-success" />
-          Powered by Google Cloud Translation
+          Powered by MyMemory Translation API
         </span>
       </header>
 
@@ -52,8 +52,8 @@ function Index() {
             Translate with <span className="text-gradient">clarity</span>.
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground sm:text-lg">
-            Accurate, instant translations for everyday text — powered by Google&apos;s
-            neural machine translation.
+            Accurate, instant translations for everyday text — powered by the MyMemory
+            translation API.
           </p>
         </div>
 
@@ -61,7 +61,7 @@ function Index() {
           <Translator />
           <p className="mt-5 flex items-center justify-center gap-1.5 text-center text-xs text-muted-foreground">
             <ShieldCheck className="size-3.5" />
-            Your text is sent securely to Google Cloud Translation and is not stored by this app.
+            Your text is sent securely over HTTPS to MyMemory and is not stored by this app.
           </p>
         </div>
       </main>

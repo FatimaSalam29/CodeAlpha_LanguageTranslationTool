@@ -85,12 +85,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Glossa — Language Translator" },
       {
         name: "description",
-        content: "Translate text between 30+ languages instantly with Google Cloud Translation.",
+        content: "Translate text between 30+ languages instantly with the MyMemory translation API.",
       },
       { property: "og:title", content: "Glossa — Language Translator" },
       {
         property: "og:description",
-        content: "Translate text between 30+ languages instantly with Google Cloud Translation.",
+        content: "Translate text between 30+ languages instantly with the MyMemory translation API.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -100,7 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: `${import.meta.env.BASE_URL}favicon.ico`, type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Translation calls go from the browser straight to the public MyMemory API (`src/lib/mymemory.ts`); keep the app free of server functions and secrets so it can be exported as a static site.
+- `npm run build:static` (STATIC_EXPORT=true, optional BASE_PATH) prerenders to `dist/client` for static hosts; keep links base-path aware (router `Link`, `import.meta.env.BASE_URL`), never hardcode `/` URLs.
+- Input rules (character limit, distinct languages) live in `src/lib/translate.schema.ts` and are covered by `src/lib/translate.test.ts`.

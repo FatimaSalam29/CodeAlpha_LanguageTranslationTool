@@ -2,8 +2,8 @@ import { z } from "zod";
 
 import { AUTO_DETECT, LANGUAGE_CODES } from "./languages";
 
-/** Google Cloud Translation recommends keeping a single request under 5,000 characters. */
-export const MAX_CHARS = 5000;
+/** MyMemory's free API accepts at most 500 characters per request. */
+export const MAX_CHARS = 500;
 
 export const translateInputSchema = z
   .object({
